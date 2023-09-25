@@ -22,6 +22,7 @@ public class AnimationHandler : MonoBehaviour
 
     void WalkAnimation()
     {
+        // if wasd is pressed then walking variable is true
         if (Input.GetKey(KeyCode.W))
         {
             walking = true;
@@ -43,6 +44,7 @@ public class AnimationHandler : MonoBehaviour
             walking = false;
         }
 
+        //connects the walking variable to the variable in the animator tab
         if (walking)
         {
             animatior.SetBool("Run", true);

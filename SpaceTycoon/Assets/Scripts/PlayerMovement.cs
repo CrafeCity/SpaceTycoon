@@ -8,7 +8,7 @@ public class PlayerMovement : MonoBehaviour
     float force = 2;
     [SerializeField]
     Transform rotationPoint;
-    Transform camera;
+    Transform playerCamera;
 
     Quaternion targetRotation = Quaternion.identity;
 
@@ -16,7 +16,7 @@ public class PlayerMovement : MonoBehaviour
     void Start()
     {
         rb = GetComponent<Rigidbody>();
-        camera = GameObject.Find("CameraHolder").transform;
+        playerCamera = GameObject.Find("CameraHolder").transform;
     }
 
     // Update is called once per frame
@@ -29,19 +29,23 @@ public class PlayerMovement : MonoBehaviour
 
     void Movement()
     {
+        //makes the player move acording to the rotationpoints direction
         if (Input.GetKey(KeyCode.W))
         {
             rb.velocity = rotationPoint.forward * force;
         }
-        else if (Input.GetKey(KeyCode.S))
+
+        if (Input.GetKey(KeyCode.S))
         {
             rb.velocity = -rotationPoint.forward * force;
         }
-        else if (Input.GetKey(KeyCode.A))
+        
+        if (Input.GetKey(KeyCode.A))
         {
             rb.velocity = -rotationPoint.right * force;
         }
-        else if (Input.GetKey(KeyCode.D))
+        
+        if (Input.GetKey(KeyCode.D))
         {
             rb.velocity = rotationPoint.right * force;
         }
@@ -49,20 +53,23 @@ public class PlayerMovement : MonoBehaviour
 
     void Rotation()
     {
-
+        // rotates the player towards the side they are wilking to using lerp
         if (Input.GetKey(KeyCode.W))
         {
             targetRotation = Quaternion.Euler(0, 0, 0);
         }
-        else if (Input.GetKey(KeyCode.S))
+        
+        if (Input.GetKey(KeyCode.S))
         {
             targetRotation = Quaternion.Euler(0, 180, 0);
         }
-        else if (Input.GetKey(KeyCode.A))
+        
+        if (Input.GetKey(KeyCode.A))
         {
             targetRotation = Quaternion.Euler(0, -90, 0);
         }
-        else if (Input.GetKey(KeyCode.D))
+        
+        if (Input.GetKey(KeyCode.D))
         {
             targetRotation = Quaternion.Euler(0, 90, 0);
         }
@@ -72,8 +79,9 @@ public class PlayerMovement : MonoBehaviour
 
     void CameraMovement()
     {
-        Vector3 newCameraPosition = Vector3.Lerp(camera.position, transform.position, Time.deltaTime * 0.1f);
-        camera.position = newCameraPosition;
-        camera.rotation = Quaternion.Euler(0, 0, 0);
+        // makes the follow the player using lerp
+        Vector3 newCameraPosition = Vector3.Lerp(playerCamera.position, transform.position, Time.deltaTime * 5f);
+        playerCamera.position = newCameraPosition;
+        playerCamera.rotation = Quaternion.Euler(0, 0, 0);
     }
 }

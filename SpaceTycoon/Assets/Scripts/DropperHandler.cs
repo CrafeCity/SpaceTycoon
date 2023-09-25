@@ -9,20 +9,17 @@ public class DropperHandler : MonoBehaviour
     [SerializeField]
     GameObject astroid;
 
-    // Start is called before the first frame update
-    void Start()
+    private void OnEnable()
     {
         StartCoroutine(AstroidSpawner());
     }
 
-     IEnumerator AstroidSpawner()
+    IEnumerator AstroidSpawner()
      {
-         if (gameObject.activeSelf)
-         {
-            Vector3 dropPosition = dropPoint.position;
-            yield return new WaitForSeconds(5);
-            GameObject AstroidClone = Instantiate(astroid, dropPosition, Quaternion.identity);
-            StartCoroutine(AstroidSpawner());
-        }
-     }
+        //waits 5 seconds and then spawns a clone it droppoint
+        Vector3 dropPosition = dropPoint.position;
+        yield return new WaitForSeconds(5);
+        GameObject AstroidClone = Instantiate(astroid, dropPosition, Quaternion.identity);
+        StartCoroutine(AstroidSpawner());
+    }
 }
