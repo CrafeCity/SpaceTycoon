@@ -12,7 +12,7 @@ public class UnlockWindHandler : MonoBehaviour
 
     MoneyHandler moneyHandler;
 
-    Vector3 beginPosition = new Vector3(7, 0, -4.5f);
+    Vector3 beginPosition = new Vector3(6.5f, 0, -4.5f);
 
     public int unlockWindStage = 0;
 

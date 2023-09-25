@@ -29,13 +29,23 @@ public class MoneyHandler : MonoBehaviour
     void Update()
     {
         //updates the text in the gameobject(GUI)
-        uncollectedMoneyText.text = "UnCollected Money: " + uncollectedMoney.ToString();
-        moneyText.text = "Money: " + money.ToString();
+        uncollectedMoneyText.text = uncollectedMoney.ToString();
+        moneyText.text = money.ToString();
     }
 
     private void OnTriggerEnter(Collider other)
     {
         // if the player collides with moneypoint then the player will collect the money and can use it
+        if (other.gameObject.tag == "Player")
+        {
+            money += uncollectedMoney;
+            uncollectedMoney = 0;
+        }
+    }
+
+    private void OnTriggerExit(Collider other)
+    {
+        // if the player exits the collider from moneypoint then the player will also collect the money and can use it
         if (other.gameObject.tag == "Player")
         {
             money += uncollectedMoney;

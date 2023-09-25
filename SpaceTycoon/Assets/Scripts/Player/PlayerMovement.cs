@@ -53,28 +53,16 @@ public class PlayerMovement : MonoBehaviour
 
     void Rotation()
     {
-        // rotates the player towards the side they are wilking to using lerp
-        if (Input.GetKey(KeyCode.W))
-        {
-            targetRotation = Quaternion.Euler(0, 0, 0);
-        }
-        
-        if (Input.GetKey(KeyCode.S))
-        {
-            targetRotation = Quaternion.Euler(0, 180, 0);
-        }
-        
-        if (Input.GetKey(KeyCode.A))
-        {
-            targetRotation = Quaternion.Euler(0, -90, 0);
-        }
-        
-        if (Input.GetKey(KeyCode.D))
-        {
-            targetRotation = Quaternion.Euler(0, 90, 0);
-        }
+        float horizontalInput = Input.GetAxis("Horizontal");
+        float verticalInput = Input.GetAxis("Vertical");
 
-        transform.rotation = Quaternion.Lerp(transform.rotation, targetRotation, Time.deltaTime * 5);
+        // Check if there's any input to avoid division by zero
+        if (Mathf.Abs(horizontalInput) > 0.1f || Mathf.Abs(verticalInput) > 0.1f)
+        {
+            Vector3 desiredDirection = new Vector3(horizontalInput, 0, verticalInput).normalized;
+            Quaternion lookRotation = Quaternion.LookRotation(desiredDirection, Vector3.up);
+            transform.rotation = Quaternion.Lerp(transform.rotation, lookRotation, Time.deltaTime * 5f);
+        }
     }
 
     void CameraMovement()
