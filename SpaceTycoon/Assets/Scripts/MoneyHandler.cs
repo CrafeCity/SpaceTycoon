@@ -12,6 +12,7 @@ public class MoneyHandler : MonoBehaviour
     TextMeshProUGUI uncollectedMoneyText;
     TextMeshProUGUI moneyText;
 
+
     //money
     public int uncollectedMoney = 0;
     public int money = 0;
