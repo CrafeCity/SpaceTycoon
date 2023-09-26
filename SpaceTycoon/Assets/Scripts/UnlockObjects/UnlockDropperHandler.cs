@@ -5,6 +5,7 @@ using UnityEngine;
 
 public class UnlockDropperHandler : MonoBehaviour
 {
+    SoundManager soundManager;
 
     // all the stages of droppers you can unlock
     [SerializeField]
@@ -41,6 +42,8 @@ public class UnlockDropperHandler : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
+        soundManager = GameObject.Find("SoundManager").GetComponent<SoundManager>();
+
         moneyHandler = GameObject.Find("MoneyPoint").GetComponent<MoneyHandler>();
 
         transform.position = beginPosition;
@@ -69,6 +72,11 @@ public class UnlockDropperHandler : MonoBehaviour
         //every time the player collides then it checks if the player has enough money and if so then it will unlock/active the Dropper 
         if (other.gameObject.tag == "Player")
         {
+            if (moneyHandler.money < cost)
+            {
+                soundManager.sfxAudioSource.PlayOneShot(soundManager.sfxClips[2]);
+            }
+
             //doing this so that it won't stay 0
             if (unlockDropperStage == 0) 
             {
@@ -80,6 +88,7 @@ public class UnlockDropperHandler : MonoBehaviour
             {
                 beginPosition = new Vector3(-1.7f, 0, -6.92f);
                 transform.position = beginPosition;
+                soundManager.sfxAudioSource.PlayOneShot(soundManager.sfxClips[1]);
 
                 cost = 2;
                 unlockDropperStage++;
@@ -91,6 +100,7 @@ public class UnlockDropperHandler : MonoBehaviour
 
                 beginPosition = new Vector3(1.35f, 0, -6.92f);
                 transform.position = beginPosition;
+                soundManager.sfxAudioSource.PlayOneShot(soundManager.sfxClips[1]);
 
                 moneyHandler.money -= cost;
                 cost = 3;
@@ -102,6 +112,7 @@ public class UnlockDropperHandler : MonoBehaviour
             {
                 beginPosition = new Vector3(4.5f, 0, -6.92f);
                 transform.position = beginPosition;
+                soundManager.sfxAudioSource.PlayOneShot(soundManager.sfxClips[1]);
 
                 moneyHandler.money -= cost;
                 cost = 4;
@@ -113,6 +124,7 @@ public class UnlockDropperHandler : MonoBehaviour
             {
                 beginPosition = new Vector3(-5.1f, 0, -6.13f);
                 transform.position = beginPosition;
+                soundManager.sfxAudioSource.PlayOneShot(soundManager.sfxClips[1]);
 
                 moneyHandler.money -= cost;
                 cost = 5;
@@ -124,6 +136,7 @@ public class UnlockDropperHandler : MonoBehaviour
             {
                 beginPosition = new Vector3(-2.3f, 0, -6.13000011f);
                 transform.position = beginPosition;
+                soundManager.sfxAudioSource.PlayOneShot(soundManager.sfxClips[1]);
 
                 moneyHandler.money -= cost;
                 cost = 6;
@@ -135,6 +148,7 @@ public class UnlockDropperHandler : MonoBehaviour
             {
                 beginPosition = new Vector3(-6.23f, 0, -1.18f);
                 transform.position = beginPosition;
+                soundManager.sfxAudioSource.PlayOneShot(soundManager.sfxClips[1]);
 
                 moneyHandler.money -= cost;
                 cost = 7;
@@ -146,6 +160,7 @@ public class UnlockDropperHandler : MonoBehaviour
             {
                 beginPosition = new Vector3(-3f, 0, -1.18f);
                 transform.position = beginPosition;
+                soundManager.sfxAudioSource.PlayOneShot(soundManager.sfxClips[1]);
 
                 moneyHandler.money -= cost;
                 cost = 8;
@@ -157,6 +172,7 @@ public class UnlockDropperHandler : MonoBehaviour
             {
                 beginPosition = new Vector3(-0.55f, 0, -1.18f);
                 transform.position = beginPosition;
+                soundManager.sfxAudioSource.PlayOneShot(soundManager.sfxClips[1]);
 
                 moneyHandler.money -= cost;
                 cost = 9;
@@ -168,6 +184,7 @@ public class UnlockDropperHandler : MonoBehaviour
             {
                 moneyHandler.money -= cost;
                 ninthDropperUnlock.SetActive(true);
+                soundManager.sfxAudioSource.PlayOneShot(soundManager.sfxClips[1]);
                 Destroy(gameObject);
             }
         }

@@ -5,6 +5,9 @@ using UnityEngine;
 
 public class UnlockSolarHandler : MonoBehaviour
 {
+    SoundManager soundManager;
+
+
     [SerializeField]
     GameObject firstSolarUnlock;
     [SerializeField]
@@ -22,6 +25,8 @@ public class UnlockSolarHandler : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
+        soundManager = GameObject.Find("SoundManager").GetComponent<SoundManager>();
+
         moneyHandler = GameObject.Find("MoneyPoint").GetComponent<MoneyHandler>();
 
         transform.position = beginPosition;
@@ -42,6 +47,11 @@ public class UnlockSolarHandler : MonoBehaviour
         //every time the player collides then it checks if the player has enough money and if so then it will unlock/active the SolarPanel 
         if (other.gameObject.tag == "Player")
         {
+            if (moneyHandler.money < cost)
+            {
+                soundManager.sfxAudioSource.PlayOneShot(soundManager.sfxClips[2]);
+            }
+
             //doing this so that it won't stay 0
             if (unlockSolarStage == 0)
             {
@@ -53,6 +63,7 @@ public class UnlockSolarHandler : MonoBehaviour
             {
                 beginPosition = new Vector3(4.5f, 0, 0.75f);
                 transform.position = beginPosition;
+                soundManager.sfxAudioSource.PlayOneShot(soundManager.sfxClips[1]);
 
                 moneyHandler.money -= cost;
                 cost = 3;
@@ -65,6 +76,7 @@ public class UnlockSolarHandler : MonoBehaviour
                 moneyHandler.money -= cost;
 
                 secondSolarUnlock.SetActive(true);
+                soundManager.sfxAudioSource.PlayOneShot(soundManager.sfxClips[1]);
                 Destroy(gameObject);
             }
         }

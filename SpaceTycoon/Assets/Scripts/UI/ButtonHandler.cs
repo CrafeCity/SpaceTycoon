@@ -4,8 +4,21 @@ using UnityEngine;
 
 public class ButtonHandler : MonoBehaviour
 {
+    [SerializeField] GameObject settingsPanel;
     public void SettingButton()
     {
-        Debug.Log("hey");
+        if (settingsPanel == settingsPanel.activeSelf)
+        {
+            settingsPanel.SetActive(false);
+        }
+        else
+        {
+            settingsPanel.SetActive(true);
+        }
+    }
+
+    public void CloseGameButton()
+    {
+        Application.Quit();
     }
 }

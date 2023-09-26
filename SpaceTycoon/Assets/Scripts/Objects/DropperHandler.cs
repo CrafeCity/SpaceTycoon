@@ -4,6 +4,8 @@ using UnityEngine;
 
 public class DropperHandler : MonoBehaviour
 {
+    SoundManager soundManager;
+
     [SerializeField]
     Transform dropPoint;
     [SerializeField]
@@ -11,6 +13,7 @@ public class DropperHandler : MonoBehaviour
 
     private void OnEnable()
     {
+        soundManager = GameObject.Find("SoundManager").GetComponent<SoundManager>();
         StartCoroutine(AstroidSpawner());
     }
 
@@ -20,6 +23,7 @@ public class DropperHandler : MonoBehaviour
         Vector3 dropPosition = dropPoint.position;
         yield return new WaitForSeconds(5);
         GameObject AstroidClone = Instantiate(astroid, dropPosition, Quaternion.identity);
+        soundManager.sfxAudioSource.PlayOneShot(soundManager.sfxClips[0]);
         StartCoroutine(AstroidSpawner());
     }
 }

@@ -5,6 +5,8 @@ using TMPro;
 
 public class UnlockWindHandler : MonoBehaviour
 {
+    SoundManager soundManager;
+
     [SerializeField]
     GameObject firstWindUnlock;
     [SerializeField]
@@ -22,6 +24,8 @@ public class UnlockWindHandler : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
+        soundManager = GameObject.Find("SoundManager").GetComponent<SoundManager>();
+
         moneyHandler = GameObject.Find("MoneyPoint").GetComponent<MoneyHandler>();
 
         transform.position = beginPosition;
@@ -43,6 +47,11 @@ public class UnlockWindHandler : MonoBehaviour
         //every time the player collides then it checks if the player has enough money and if so then it will unlock/active the Dropper 
         if (other.gameObject.tag == "Player")
         {
+            if (moneyHandler.money < cost)
+            {
+                soundManager.sfxAudioSource.PlayOneShot(soundManager.sfxClips[2]);
+            }
+
             //doing this so that it won't stay 0
             if (unlockWindStage == 0)
             {
@@ -54,6 +63,9 @@ public class UnlockWindHandler : MonoBehaviour
             {
                 beginPosition = new Vector3(7.8f, 0, -4.5f);
                 transform.position = beginPosition;
+                soundManager.sfxAudioSource.PlayOneShot(soundManager.sfxClips[1]);
+
+                moneyHandler.money -= cost;
 
                 cost = 3;
                 unlockWindStage++;
@@ -65,7 +77,7 @@ public class UnlockWindHandler : MonoBehaviour
                 secondWindUnlock.SetActive(true);
 
                 moneyHandler.money -= cost;
-
+                soundManager.sfxAudioSource.PlayOneShot(soundManager.sfxClips[1]);
                 Destroy(gameObject);
             }
         }

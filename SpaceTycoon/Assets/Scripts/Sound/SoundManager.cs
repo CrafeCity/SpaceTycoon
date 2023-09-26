@@ -6,21 +6,42 @@ using UnityEngine.UI;
 public class SoundManager : MonoBehaviour
 {
     [SerializeField] Slider SoundSlider;
+    [SerializeField] Slider musicSlider;
+    [SerializeField] Slider sfxSlider;
 
-    // Start is called before the first frame update
-    void Start()
-    {
+    public AudioSource musicAudioSource;
+    public AudioSource sfxAudioSource;
+
+    public AudioClip[] musicClips;
+    public AudioClip[] sfxClips;
         
-    }
 
     // Update is called once per frame
     void Update()
     {
-        Sound();
+        if (!musicAudioSource.isPlaying)
+        {
+            musicAudioSource.PlayOneShot(musicClips[0]);
+        }
+
+        PlaySound();
+        PlayMusic();
+        PlaySFX();
     }
 
-    void Sound()
+    void PlaySound()
     {
         AudioListener.volume = SoundSlider.value;
+    }
+
+    void PlayMusic()
+    {
+        musicAudioSource.volume = musicSlider.value;
+
+    }
+
+    void PlaySFX()
+    {
+        sfxAudioSource.volume = sfxSlider.value;
     }
 }
