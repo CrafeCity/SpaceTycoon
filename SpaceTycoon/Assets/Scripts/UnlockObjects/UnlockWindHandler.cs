@@ -19,7 +19,7 @@ public class UnlockWindHandler : MonoBehaviour
     public int unlockWindStage = 0;
 
     TextMeshProUGUI costText;
-    int cost = 2;
+    int cost = 120;
 
     // Start is called before the first frame update
     void Start()
@@ -67,7 +67,7 @@ public class UnlockWindHandler : MonoBehaviour
 
                 moneyHandler.money -= cost;
 
-                cost = 3;
+                cost = 150;
                 unlockWindStage++;
 
                 firstWindUnlock.SetActive(true);

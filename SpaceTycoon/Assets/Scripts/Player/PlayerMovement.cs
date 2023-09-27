@@ -4,51 +4,24 @@ using UnityEngine;
 
 public class PlayerMovement : MonoBehaviour
 {
-    Rigidbody rb;
-    float force = 2;
     [SerializeField]
     Transform rotationPoint;
     Transform playerCamera;
 
-    Quaternion targetRotation = Quaternion.identity;
+    public float horizontalInputPhone = 0f;
+    public float verticalInputPhone = 0f;
 
     // Start is called before the first frame update
     void Start()
     {
-        rb = GetComponent<Rigidbody>();
         playerCamera = GameObject.Find("CameraHolder").transform;
     }
 
     // Update is called once per frame
     void Update()
     {
-        Movement();
         Rotation();
         CameraMovement();
-    }
-
-    void Movement()
-    {
-        //makes the player move acording to the rotationpoints direction
-        if (Input.GetKey(KeyCode.W))
-        {
-            rb.velocity = rotationPoint.forward * force;
-        }
-
-        if (Input.GetKey(KeyCode.S))
-        {
-            rb.velocity = -rotationPoint.forward * force;
-        }
-        
-        if (Input.GetKey(KeyCode.A))
-        {
-            rb.velocity = -rotationPoint.right * force;
-        }
-        
-        if (Input.GetKey(KeyCode.D))
-        {
-            rb.velocity = rotationPoint.right * force;
-        }
     }
 
     void Rotation()
@@ -63,6 +36,15 @@ public class PlayerMovement : MonoBehaviour
             Quaternion lookRotation = Quaternion.LookRotation(desiredDirection, Vector3.up);
             transform.rotation = Quaternion.Lerp(transform.rotation, lookRotation, Time.deltaTime * 5f);
         }
+
+        // Phone Rotataion
+        if (Mathf.Abs(horizontalInputPhone) > 0.1f || Mathf.Abs(verticalInputPhone) > 0.1f)
+        {
+            Vector3 desiredDirection = new Vector3(horizontalInputPhone, 0, verticalInputPhone).normalized;
+            Quaternion lookRotation = Quaternion.LookRotation(desiredDirection, Vector3.up);
+            transform.rotation = Quaternion.Lerp(transform.rotation, lookRotation, Time.deltaTime * 5f);
+        }
+
     }
 
     void CameraMovement()

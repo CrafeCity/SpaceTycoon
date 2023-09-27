@@ -5,12 +5,14 @@ using UnityEngine;
 public class AnimationHandler : MonoBehaviour
 {
     Animator animatior;
+    PlayerMovement playerMovement;
 
     bool walking = false;
 
     // Start is called before the first frame update
     void Start()
     {
+        playerMovement = GetComponent<PlayerMovement>();
         animatior = GetComponent<Animator>();
     }
 
@@ -23,19 +25,19 @@ public class AnimationHandler : MonoBehaviour
     void WalkAnimation()
     {
         // if wasd is pressed then walking variable is true
-        if (Input.GetKey(KeyCode.W))
+        if (Input.GetKey(KeyCode.W) || playerMovement.verticalInputPhone > 0.1f)
         {
             walking = true;
         }
-        else if (Input.GetKey(KeyCode.S))
+        else if (Input.GetKey(KeyCode.S) || playerMovement.verticalInputPhone < -0.1f)
         {
             walking = true;
         }
-        else if (Input.GetKey(KeyCode.A))
+        else if (Input.GetKey(KeyCode.A) || playerMovement.horizontalInputPhone > 0.1f)
         {
             walking = true;
         }
-        else if (Input.GetKey(KeyCode.D))
+        else if (Input.GetKey(KeyCode.D) || playerMovement.horizontalInputPhone < -0.1f)
         {
             walking = true;
         }

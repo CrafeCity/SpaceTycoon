@@ -90,7 +90,7 @@ public class UnlockDropperHandler : MonoBehaviour
                 transform.position = beginPosition;
                 soundManager.sfxAudioSource.PlayOneShot(soundManager.sfxClips[1]);
 
-                cost = 2;
+                cost = 10;
                 unlockDropperStage++;
 
                 firstDropperUnlock.SetActive(true);
@@ -103,7 +103,7 @@ public class UnlockDropperHandler : MonoBehaviour
                 soundManager.sfxAudioSource.PlayOneShot(soundManager.sfxClips[1]);
 
                 moneyHandler.money -= cost;
-                cost = 3;
+                cost = 30;
                 unlockDropperStage++;
 
                 secondDropperUnlock.SetActive(true);
@@ -115,7 +115,7 @@ public class UnlockDropperHandler : MonoBehaviour
                 soundManager.sfxAudioSource.PlayOneShot(soundManager.sfxClips[1]);
 
                 moneyHandler.money -= cost;
-                cost = 4;
+                cost = 60;
                 unlockDropperStage++;
 
                 tirthDropperUnlock.SetActive(true);
@@ -127,7 +127,7 @@ public class UnlockDropperHandler : MonoBehaviour
                 soundManager.sfxAudioSource.PlayOneShot(soundManager.sfxClips[1]);
 
                 moneyHandler.money -= cost;
-                cost = 5;
+                cost = 100;
                 unlockDropperStage++;
 
                 fourthDropperUnlock.SetActive(true);
@@ -139,7 +139,7 @@ public class UnlockDropperHandler : MonoBehaviour
                 soundManager.sfxAudioSource.PlayOneShot(soundManager.sfxClips[1]);
 
                 moneyHandler.money -= cost;
-                cost = 6;
+                cost = 150;
                 unlockDropperStage++;
 
                 fifthDropperUnlock.SetActive(true);
@@ -151,7 +151,7 @@ public class UnlockDropperHandler : MonoBehaviour
                 soundManager.sfxAudioSource.PlayOneShot(soundManager.sfxClips[1]);
 
                 moneyHandler.money -= cost;
-                cost = 7;
+                cost = 210;
                 unlockDropperStage++;
 
                 sixthDropperUnlock.SetActive(true);
@@ -163,7 +163,7 @@ public class UnlockDropperHandler : MonoBehaviour
                 soundManager.sfxAudioSource.PlayOneShot(soundManager.sfxClips[1]);
 
                 moneyHandler.money -= cost;
-                cost = 8;
+                cost = 280;
                 unlockDropperStage++;
 
                 seventhDropperUnlock.SetActive(true);
@@ -175,7 +175,7 @@ public class UnlockDropperHandler : MonoBehaviour
                 soundManager.sfxAudioSource.PlayOneShot(soundManager.sfxClips[1]);
 
                 moneyHandler.money -= cost;
-                cost = 9;
+                cost = 360;
                 unlockDropperStage++;
 
                 eigthDropperUnlock.SetActive(true);
