@@ -6,6 +6,7 @@ public class ButtonHandler : MonoBehaviour
 {
     [SerializeField] GameObject settingsPanel;
     [SerializeField] GameObject shopPanel;
+    [SerializeField] GameObject fuelPanel;
     [SerializeField] GameObject[] tutorial;
 
     int tutorialCount = 0;
@@ -57,6 +58,7 @@ public class ButtonHandler : MonoBehaviour
     {
         settingsPanel.SetActive(false);
         shopPanel.SetActive(false);
+        fuelPanel.SetActive(false);
     }
 
     public void SettingButton()

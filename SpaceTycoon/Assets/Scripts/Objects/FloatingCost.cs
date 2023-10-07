@@ -4,8 +4,8 @@ using UnityEngine;
 
 public class FloatingCost : MonoBehaviour
 {
-    Vector3 floatingDown = new Vector3(0, 0.5f, 0);
-    Vector3 floatingUp = new Vector3(0, 1.5f, 0);
+    Vector3 floatingDown = new Vector3(0, -0.5f, 0);
+    Vector3 floatingUp = new Vector3(0, 0.5f, 0);
     Vector3 floatingCost;
 
     bool up = false;
@@ -14,11 +14,11 @@ public class FloatingCost : MonoBehaviour
 
     private void Update()
     {
-        if (transform.localPosition.y > 0.7 && transform.localPosition.y < 0.9)
+        if (transform.localPosition.y > -0.3 && transform.localPosition.y < -0.1)
         {
             up = false;
         }
-        else if (transform.localPosition.y > 1.1 && transform.localPosition.y < 1.3)
+        else if (transform.localPosition.y > 0.1 && transform.localPosition.y < 0.3)
         {
             up = true;
         }
