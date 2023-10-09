@@ -5,22 +5,19 @@ using UnityEngine.UI;
 
 public class FuelHandler : MonoBehaviour
 {
-    FuelHandler fuelHandler;
+    ColliderHandler colliderHandler;
 
-    GameObject fuelPanel;
-    Slider fuelSlider;
-    Image fuelFill;
+    [SerializeField] GameObject fuelPanel;
 
     [SerializeField] GameObject floatingText;
 
-    [SerializeField]float dropperFuel = 1f;
+    public float dropperFuel = 1f;
+    public bool dropper = false;
 
     private void Start()
     {
-        fuelPanel = GameObject.Find("FuelPanel");
-        fuelSlider = GameObject.Find("FuelSlider").GetComponent<Slider>();
-        fuelFill = GameObject.Find("FuelFill").GetComponent<Image>();
 
+        colliderHandler = GameObject.Find("astronaut").GetComponent<ColliderHandler>();
 
         floatingText.SetActive(false);
     }
@@ -36,20 +33,25 @@ public class FuelHandler : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        SliderColor();
         FuelGUI();
+
+        if (dropper)
+        {
+            colliderHandler.currentFuel = dropperFuel;
+        }
     }
 
     private void OnTriggerEnter(Collider other)
     {
         floatingText.SetActive(true);
 
-        fuelHandler = transform.Find("TriggerBox").GetComponent<FuelHandler>();
+        dropper = true;
     }
 
     private void OnTriggerExit(Collider other)
     {
         floatingText.SetActive(false);
+        dropper = false;
     }
 
     void FuelGUI()
@@ -60,32 +62,6 @@ public class FuelHandler : MonoBehaviour
             {
                 fuelPanel.SetActive(true);
             }
-
-            if (fuelHandler != null)
-            {
-                fuelSlider.value = fuelHandler.dropperFuel;
-            }
-        }
-    }
-
-    void SliderColor()
-    {
-
-        if (fuelSlider.value >= 0.7f)
-        {
-            fuelFill.color = Color.green;
-        }
-        else if (fuelSlider.value < 0.7f && fuelSlider.value >= 0.5f)
-        {
-            fuelFill.color = new Color(255f / 255f, 165f / 255f, 0f);
-        }
-        else if (fuelSlider.value < 0.4f && fuelSlider.value >= 0.2f)
-        {
-            fuelFill.color = Color.yellow;
-        }
-        else if (fuelSlider.value < 0.2f)
-        {
-            fuelFill.color = Color.red;
         }
     }
 

@@ -13,6 +13,7 @@ public class ButtonHandler : MonoBehaviour
 
     PlayerMovement playerMovement;
 
+
     private void Start()
     {
         playerMovement = GameObject.Find("astronaut").GetComponent<PlayerMovement>();
@@ -90,6 +91,11 @@ public class ButtonHandler : MonoBehaviour
             shopPanel.SetActive(true);
             settingsPanel.SetActive(false);
         }
+    }
+
+    public void FuelButton()
+    {
+        
     }
 
     public void ForwardPointerDown()
