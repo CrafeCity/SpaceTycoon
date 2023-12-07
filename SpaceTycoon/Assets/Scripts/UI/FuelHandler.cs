@@ -11,13 +11,14 @@ public class FuelHandler : MonoBehaviour
 
     [SerializeField] GameObject floatingText;
 
+    public float collectedFuel = 1f;
     public float dropperFuel = 1f;
     public bool dropper = false;
 
     private void Start()
     {
 
-        colliderHandler = GameObject.Find("astronaut").GetComponent<ColliderHandler>();
+        colliderHandler = transform.parent.parent.parent.GetComponent<ColliderHandler>();
 
         floatingText.SetActive(false);
     }
@@ -38,6 +39,15 @@ public class FuelHandler : MonoBehaviour
         if (dropper)
         {
             colliderHandler.currentFuel = dropperFuel;
+
+            if (colliderHandler.addFuel)
+            {
+                if (collectedFuel >= 0.1 && dropperFuel <= 0.9f)
+                {
+                    dropperFuel += 0.1f;
+                    colliderHandler.addFuel = false;
+                }
+            }
         }
     }
 
@@ -70,10 +80,5 @@ public class FuelHandler : MonoBehaviour
         yield return new WaitForSeconds(5);
         dropperFuel -= 0.1f;
         StartCoroutine(MinusFuel());
-    }
-
-    public void AddFuel()
-    {
-        dropperFuel += 0.2f;
     }
 }

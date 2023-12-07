@@ -7,6 +7,7 @@ public class ColliderHandler : MonoBehaviour
 {
     public Slider fuelSlider;
     public float currentFuel = 1f;
+    public bool addFuel = false;
 
     [SerializeField] Image fuelFill;
     [SerializeField] GameObject fuelPanel;
@@ -37,6 +38,11 @@ public class ColliderHandler : MonoBehaviour
         {
             fuelFill.color = Color.red;
         }
+    }
+
+    public void AddFuel()
+    {
+        addFuel = true;
     }
 
 }
